@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.mapper.BoardMapper">
+    
+    <sql id="search">
+        <choose>
+            <when test="map.searchMenu == 'board_subject'" >
+                 and (${map.searchMenu} LIKE concat('%',#{map.searchData},'%'))
+            </when>
+            <when test="map.searchMenu == 'board_writer'" >
+                 and (${map.searchMenu} LIKE concat('%',#{map.searchData},'%'))
+            </when>
+            <when test="map.searchMenu == 'board_content'" >
+                 and (${map.searchMenu} LIKE concat('%',#{map.searchData},'%'))
+            </when>
+            <otherwise>
+            </otherwise>            
+        </choose>
+    </sql>
+    
+    <select id="getList" parameterType="Map" resultType="board.model.Board">
+        select * 
+        from (
+        	select (@ROWNUM:=@ROWNUM+1),B.*
+        	from (
+        		select *
+        		from board
+        		where 1=1
+        		<include refid="search" />
+        	)B, (SELECT @ROWNUM:=0) TMP
+        )T
+        order by board_no desc
+        limit #{map.startRecord},#{map.pageSize}
+    </select>
+   
+    <select id="getListOne" resultType="board.model.Board">
+        select * from board where board_no = #{board_no}
+    </select>
+    
+    <insert id="setInsert">
+			insert into board (board_subject,board_writer,board_content,member_id)
+			values(#{board_subject},#{board_writer},#{board_content},#{member_id})
+    </insert>
+    
+    <delete id="setDelete">
+        	delete from board where board_no = #{board_no}
+    </delete>
+    
+    <update id="setUpdate">
+        update board
+        	set board_subject = #{board_subject},
+        	board_content = #{board_content}
+        	where board_no = #{board_no}
+    </update>
+  
+    <update id="setViewUP">
+        update board
+        	set board_views = board_views +1
+        	where board_no = #{board_no}
+    </update>
+    
+    <select id = "getTotalRecord" resultType="int">
+        select count(*) from board;
+    </select>
+    
+    <!-- 회원이 해당 게시물에 대한 좋아요 정보 조회 -->
+    <select id="getBoardRecoStatus" parameterType="Map" resultType="int">
+        select count(*) from board_reco
+        where board_no = #{map.board_no} and
+        	  member_id = #{map.member_id}
+    </select>
+    
+    <!-- 해당게시물 추천 갯수 -->
+    <select id="getTotalBoardReco" resultType="int">
+        select count(*) from board_reco
+        where board_no = #{board_no}
+    </select>
+    
+    <!-- 좋아요 등록 -->
+    <insert id="setRecoInsert" parameterType="Map">
+        insert into board_reco (board_no,member_id,reco_status) values
+        					   (#{map.board_no},#{map.member_id},#{map.reco_status})
+    </insert>
+    
+    <!-- 좋아요 해제 -->
+  	<delete id="setRecoDelete" parameterType="Map">
+  	    delete from board_reco 
+  	    where board_no = #{map.board_no} and member_id= #{map.member_id}
+  	</delete>
+</mapper>
