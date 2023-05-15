@@ -22,7 +22,7 @@ public interface BoardMapper {
 	public int setUpdate(Board member);
 	
 	public int setViewUP(int board_no);
-	public int getTotalRecord();
+	public int getTotalRecord(@Param("map")Map<String,Object> map);
 	
 	//사용자에 대한 좋아요 상태 조회
 	public int getBoardRecoStatus(@Param("map")Map<String,Object> map);

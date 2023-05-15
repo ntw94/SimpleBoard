@@ -27,34 +27,107 @@ limit 20, 5; -- 여기 start,
         order by board_no desc
         limit 0,3
 
-insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
-			insert into board (board_subject,board_writer,board_content)
-			values('첫번째 글입니다.','홍길동','안녕하세요!!');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글1 입니다.','test','안녕하세요!!1','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글2 입니다.','test','안녕하세요!!2','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글3 입니다.','test','안녕하세요!!3','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글4 입니다.','test','안녕하세요!!4','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글5 입니다.','test','안녕하세요!!5','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글6 입니다.','test','안녕하세요!!6','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글7 입니다.','test','안녕하세요!!7','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글8 입니다.','test','안녕하세요!!8','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글1 입니다.','test','안녕하세요!!1','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글2 입니다.','test','안녕하세요!!2','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글3 입니다.','test','안녕하세요!!3','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글4 입니다.','test','안녕하세요!!4','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글5 입니다.','test','안녕하세요!!5','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글6 입니다.','test','안녕하세요!!6','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글7 입니다.','test','안녕하세요!!7','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글8 입니다.','test','안녕하세요!!8','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글1 입니다.','test','안녕하세요!!1','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글2 입니다.','test','안녕하세요!!2','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글3 입니다.','test','안녕하세요!!3','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글4 입니다.','test','안녕하세요!!4','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글5 입니다.','test','안녕하세요!!5','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글6 입니다.','test','안녕하세요!!6','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글7 입니다.','test','안녕하세요!!7','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글8 입니다.','test','안녕하세요!!8','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글1 입니다.','test','안녕하세요!!1','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글2 입니다.','test','안녕하세요!!2','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글3 입니다.','test','안녕하세요!!3','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글4 입니다.','test','안녕하세요!!4','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글5 입니다.','test','안녕하세요!!5','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글6 입니다.','test','안녕하세요!!6','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글7 입니다.','test','안녕하세요!!7','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글8 입니다.','test','안녕하세요!!8','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글1 입니다.','test','안녕하세요!!1','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글2 입니다.','test','안녕하세요!!2','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글3 입니다.','test','안녕하세요!!3','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글4 입니다.','test','안녕하세요!!4','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글5 입니다.','test','안녕하세요!!5','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글6 입니다.','test','안녕하세요!!6','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글7 입니다.','test','안녕하세요!!7','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글8 입니다.','test','안녕하세요!!8','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글1 입니다.','test','안녕하세요!!1','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글2 입니다.','test','안녕하세요!!2','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글3 입니다.','test','안녕하세요!!3','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글4 입니다.','test','안녕하세요!!4','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글5 입니다.','test','안녕하세요!!5','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글6 입니다.','test','안녕하세요!!6','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글7 입니다.','test','안녕하세요!!7','test');
+insert into board (board_subject,board_writer,board_content,member_id)
+values('글8 입니다.','test','안녕하세요!!8','test');
+
+
+truncate table board;
+
+
 			delete from board;
 			
 			
@@ -78,8 +151,22 @@ select * from board;
 
 
 
+create procedure insertBoard100Proc
+begin
+	DECLARE I INT;
+	
+	SET I = 1;
+	
+	MYWHILE : WHILE(I <= 100) DO
+		insert into board (board_subject,board_writer,board_content,member_id)
+			values('첫번째 글입니다.','test','안녕하세요!!'+I,'test');
+		
+		SET I = I+1;
+	ITERATE MYWHILE;
+	
+end 
 
-
+call insertBoard100Proc
 
 
 

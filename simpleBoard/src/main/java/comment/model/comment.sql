@@ -16,8 +16,8 @@ select * from comment;
 
 delete from comment where comment_no = 4 and member_id = 'hong'
 
-update comment
-        	set comment_content = '내가직접 수정했음',
-        		comment_regiDate = now()
-        	where comment_no = 8 and
-        			member_id = 'hong'
+
+truncate table comment;
+truncate table board;
+truncate table board_reco;
+truncate table member;

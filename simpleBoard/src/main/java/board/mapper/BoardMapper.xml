@@ -60,8 +60,11 @@
         	where board_no = #{board_no}
     </update>
     
-    <select id = "getTotalRecord" resultType="int">
-        select count(*) from board;
+    <select id = "getTotalRecord" parameterType="Map" resultType="int">
+        select count(*) 
+        from board
+        where 1=1
+        <include refid="search" />
     </select>
     
     <!-- 회원이 해당 게시물에 대한 좋아요 정보 조회 -->

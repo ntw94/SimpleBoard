@@ -32,7 +32,7 @@
 			document.searchForm.method="get";
 			document.searchForm.submit();
 		}
-	
+		
 	</script>
 </head>
 <body>
@@ -80,12 +80,12 @@
 									<ul class="pagination">
 										<!-- 첫페이지로 가기 -->
 										<c:if test="${page != 1 }">
-											<li><a href="${contextPath}/boardList.do?page=1">&lt;&lt;</a></li>							
+											<li><a href="${contextPath}/boardList.do?searchMenu=${searchMenu }&searchData=${searchData}&page=1">&lt;&lt;</a></li>							
 										</c:if>
 										
 										<!-- 이전버튼 -->
 										<c:if test="${boardPage.prvBlock != 0 }">
-											<li><a href="${contextPath}/boardList.do?page=${boardPage.prePage}">이전</a></li>
+											<li><a href="${contextPath}/boardList.do?searchMenu=${searchMenu }&searchData=${searchData}&page=${boardPage.prePage}">이전</a></li>
 										</c:if>
 									
 									    <c:forEach var="i" begin="${boardPage.startPage }" end="${boardPage.lastPage}" >
@@ -93,18 +93,18 @@
 									    		<li class="active"><a href="#">${i }</a></li>
 									    	</c:if>
 									    	<c:if test="${i != page }">
-									    		<li><a href="${contextPath }/boardList.do?page=${i}">${i }</a></li>
+									    		<li><a href="${contextPath }/boardList.do?searchMenu=${searchMenu }&searchData=${searchData}&page=${i}">${i }</a></li>
 									    	</c:if>
 									    </c:forEach>
 									    
 										<!-- 다음 페이지로  -->
 										<c:if test="${boardPage.nowBlock != boardPage.nxtBlock}">
-									    	<li><a href="${contextPath}/boardList.do?page=${boardPage.nxtPage}">다음</a></li>
+									    	<li><a href="${contextPath}/boardList.do?searchMenu=${searchMenu }&searchData=${searchData}&page=${boardPage.nxtPage}">다음</a></li>
 										</c:if>
 									
 										<!-- 마지막 페이지로 가기 -->
 										<c:if test="${boardPage.totalPage != page}">
-											<li><a href="${contextPath}/boardList.do?page=${boardPage.totalPage}">&gt;&gt;</a></li>
+											<li><a href="${contextPath}/boardList.do?searchMenu=${searchMenu }&searchData=${searchData}&page=${boardPage.totalPage}">&gt;&gt;</a></li>
 										</c:if>
 								  	</ul> <!-- pager -->
 							  	</c:if>

@@ -60,21 +60,24 @@ public class BoardController {
 		
 		if(page == null || page.equals(""))
 			page = "1";
-		int totalRecord = mapper.getTotalRecord();
+		
 		//좋아요 상태
 		
 		int pageSize = 5;
-		
-		BoardPaging boardPage = new BoardPaging(pageSize,10,totalRecord,Integer.parseInt(page));
-		
-		
+
+
 		Map<String,Object> map = new HashMap<>();
-		map.put("startRecord", boardPage.getStartRecord()-1);
-		map.put("lastRecord", boardPage.getLastRecord());
-		map.put("pageSize",pageSize);
 		map.put("searchMenu",searchMenu);
 		map.put("searchData",searchData);
 		
+		int totalRecord = mapper.getTotalRecord(map);//전체 게시글 수 구하기
+		BoardPaging boardPage = new BoardPaging(pageSize,10,totalRecord,Integer.parseInt(page));
+		
+		
+		map.put("startRecord", boardPage.getStartRecord()-1);
+		map.put("lastRecord", boardPage.getLastRecord());
+		map.put("pageSize",pageSize);
+
 		
 		List<Board> list = mapper.getList(map);
 		model.addAttribute("list", list);
