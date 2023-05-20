@@ -49,6 +49,7 @@
 						<td>작성자</td>
 						<td>작성일</td>
 						<td>조회수</td>
+						<td>추천수</td>
 					</tr>
 					
 					<c:if test="${fn:length(list) == 0 }">
@@ -60,7 +61,6 @@
 							</td>
 						</tr>
 					</c:if>
-				
 					
 					<c:forEach var="list" items="${list}">
 						<c:set var="i" value="${i+1 }"/>
@@ -70,12 +70,12 @@
 							<td>${list.board_writer}</td>
 							<td>${fn:split(list.board_regiDate," ")[0]}</td>
 							<td>${list.board_views }</td>
-							
+							<td>${list.board_recommend }</td>
 						</tr>
 					</c:forEach>
 							
 					<tr align="center">
-							<td colspan=5 >
+							<td colspan=6 >
 								<c:if test="${fn:length(list) != 0 }">
 									<ul class="pagination">
 										<!-- 첫페이지로 가기 -->

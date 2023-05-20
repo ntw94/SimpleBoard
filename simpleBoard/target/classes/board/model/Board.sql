@@ -6,6 +6,7 @@ create table board(
 	board_content text,  
 	board_regiDate datetime default now(),
 	board_views int default 0,
+	board_recommend int default 0,
 	member_id varchar(50),
 	
 	primary key(board_no)
@@ -169,8 +170,15 @@ end
 call insertBoard100Proc
 
 
+select * from board;
+select * from board_reco;
 
+select b.board_no,count(*)
+from board_reco b
+group by b.board_no
+order by b.board_no desc
 
+truncate table board_reco;
 
 
 

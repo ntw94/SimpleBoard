@@ -22,10 +22,12 @@
     <select id="getList" parameterType="Map" resultType="board.model.Board">
         select * 
         from (
-        	select (@ROWNUM:=@ROWNUM+1),B.*
+        	select (@ROWNUM:=@ROWNUM+1),board_no,board_subject,board_writer,
+        				board_content,board_regiDate,board_views,board_recommend
         	from (
-        		select *
-        		from board
+        		select board_no,board_subject,board_writer,
+        				board_content,board_regiDate,board_views,(select count(*) from board_reco br where br.board_no = bo.board_no) board_recommend
+        		from board bo
         		where 1=1
         		<include refid="search" />
         	)B, (SELECT @ROWNUM:=0) TMP
