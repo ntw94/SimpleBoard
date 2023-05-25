@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import comment.mapper.CommentMapper;
 import comment.model.Comment;
+import comment.service.CommentService;
 
 @RequestMapping("/comment")
 @RestController
@@ -24,16 +25,19 @@ public class CommentController {
 	@Autowired
 	CommentMapper commentMapper;
 	
+	@Autowired
+	CommentService commentService;
+	
 	@GetMapping("/listAll/{board_no}")
 	public List<Comment> boardList(@PathVariable("board_no") int board_no){
-		List<Comment> list = commentMapper.getList(board_no);
+		List<Comment> list = commentService.getList(board_no);
 		
 		return list;
 	}
 	
 	@PostMapping("/insert")
 	public void commentInsert(Comment comment) {
-		commentMapper.setInsert(comment);
+		commentService.setInsert(comment);
 	}
 	
 	@GetMapping("/delete")
@@ -42,7 +46,7 @@ public class CommentController {
 		map.put("comment_no", comment_no);
 		map.put("member_id",member_id);
 		
-		int res = commentMapper.setDelete(map);
+		int res = commentService.setDelete(map);
 	}
 	
 	@PutMapping("/update")
@@ -52,8 +56,8 @@ public class CommentController {
 		map.put("member_id",comment.getMember_id());
 		map.put("comment_content",comment.getComment_content());
 		
-		System.out.println(map.toString());
-		commentMapper.setUpdate(map);
+		//System.out.println(map.toString());
+		commentService.setUpdate(map);
 	}
 	
 }

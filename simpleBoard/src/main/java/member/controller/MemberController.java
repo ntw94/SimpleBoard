@@ -23,6 +23,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import member.mapper.MemberMapper;
 import member.model.Member;
+import member.service.MemberService;
 
 @Controller
 public class MemberController {
@@ -30,6 +31,9 @@ public class MemberController {
 	@Autowired
 	private MemberMapper mapper;
 
+	@Autowired
+	private MemberService memberService;
+	
 	@RequestMapping("/*")
 	public String index(Model model) {
 		
@@ -62,7 +66,7 @@ public class MemberController {
 		
 	
 		if(isPass) {
-			mapper.setInsert(member);
+			memberService.setInsert(member);
 			session.setAttribute("member", member);
 			return "redirect:/index";
 		}else {
@@ -82,7 +86,7 @@ public class MemberController {
 		}
 		Member memberId = (Member) session.getAttribute("member");
 		
-		Member resMember = mapper.getListOne(memberId.getMember_id());
+		Member resMember = memberService.getListOne(memberId.getMember_id());
 		model.addAttribute("memberDTO", resMember);
 		
 		return "member/memberUpdateForm";
@@ -91,7 +95,7 @@ public class MemberController {
 	@RequestMapping("/memberUpdate.do")
 	public String memberUpdate(Member member) {
 		
-		mapper.setUpdate(member);
+		memberService.setUpdate(member);
 		
 		return "redirect:/index";
 	}
@@ -104,7 +108,7 @@ public class MemberController {
 			return "index";
 		}
 		Member memberId = (Member) session.getAttribute("member");
-		Member resMember = mapper.getListOne(memberId.getMember_id());
+		Member resMember = memberService.getListOne(memberId.getMember_id());
 		
 		mapper.setDelete(resMember.getMember_no());
 		
@@ -117,7 +121,7 @@ public class MemberController {
 	public @ResponseBody int memberIdCheck(@RequestParam("member_id") String member_id){
 		
 		System.out.println(member_id);
-		Member member= mapper.getListOne(member_id);
+		Member member= memberService.getListOne(member_id);
 		
 		if(member != null || member_id.equals("")) {
 			return 0;
@@ -135,7 +139,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberLogin.do")
 	public String memberLogin(Member member , HttpSession session) {
-		Member m = mapper.setLogin(member);
+		Member m = memberService.setLogin(member);
 		
 		if(m != null) {
 			session.setAttribute("member", m);

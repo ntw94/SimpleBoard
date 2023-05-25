@@ -22,6 +22,7 @@ import _common.BoardPaging;
 import board.mapper.BoardMapper;
 import board.model.Board;
 import board.model.BoardReco;
+import board.service.BoardService;
 import comment.mapper.CommentMapper;
 import comment.model.Comment;
 import member.model.Member;
@@ -33,9 +34,10 @@ public class BoardController {
 	private BoardMapper mapper;
 	
 	@Autowired
-	private CommentMapper commentMapper;
+	private BoardService service;
 	
-
+	@Autowired
+	private CommentMapper commentMapper;
 	
 	//게시판 메인페이지
 	@RequestMapping("/boardList.do")
@@ -46,7 +48,7 @@ public class BoardController {
 			@RequestParam(name = "searchData",required=false) String searchData
 			) {
 
-		System.out.println(searchMenu +" " + searchData);
+		//System.out.println(searchMenu +" " + searchData);
 		
 		if(searchMenu == null || searchMenu.equals("")) {
 			searchMenu="";
@@ -64,22 +66,27 @@ public class BoardController {
 		//좋아요 상태
 		
 		int pageSize = 5;
+		int blockSize =10;
 
 
 		Map<String,Object> map = new HashMap<>();
 		map.put("searchMenu",searchMenu);
 		map.put("searchData",searchData);
 		
-		int totalRecord = mapper.getTotalRecord(map);//전체 게시글 수 구하기
-		BoardPaging boardPage = new BoardPaging(pageSize,10,totalRecord,Integer.parseInt(page));
+		//Map<String,Object> map = new HashMap<>();
+		//1. service.getTotalRecord(map);
+		//2. service.createBoardPaging(pageSize,10,totalRecord,Integer.parseInt(page));
+		//3. service.getBoardList(map);
 		
+		int totalRecord = service.getTotalRecord(map);//전체 게시글 수 구하기
+		BoardPaging boardPage = service.createBoardPaging(pageSize, blockSize, totalRecord, page);
 		
 		map.put("startRecord", boardPage.getStartRecord()-1);
 		map.put("lastRecord", boardPage.getLastRecord());
 		map.put("pageSize",pageSize);
 
+		List<Board> list = service.getBoardListAll(map);
 		
-		List<Board> list = mapper.getList(map);
 		model.addAttribute("list", list);
 		model.addAttribute("page",page);
 		model.addAttribute("boardPage",boardPage);
@@ -101,12 +108,11 @@ public class BoardController {
 	@GetMapping("/boardView.do")
 	public String boardView(Model model,@RequestParam("no") int board_no,HttpServletRequest request) {
 		
-
-		mapper.setViewUP(board_no);
+		service.setViewUP(board_no);
 
 		int resRecoStatus = 0;
 		
-		Board boardDTO = mapper.getListOne(board_no);
+		Board boardDTO = service.getListOne(board_no);
 		model.addAttribute("boardDTO", boardDTO);
 		
 		List<Comment> commentList = commentMapper.getList(board_no);
@@ -116,7 +122,7 @@ public class BoardController {
 		model.addAttribute("commentCount",commentCnt);
 		
 		//좋아요 갯수
-		int recommendCnt = mapper.getTotalBoardReco(board_no);
+		int recommendCnt = service.getTotalBoardReco(board_no);
 		model.addAttribute("recoCnt", recommendCnt);
 		
 
@@ -128,7 +134,7 @@ public class BoardController {
 				recoMap.put("member_id", sessionMem.getMember_id());
 				recoMap.put("board_no",board_no);
 			
-				resRecoStatus= mapper.getBoardRecoStatus(recoMap);
+				resRecoStatus= service.getBoardRecoStatus(recoMap);
 			}
 		}
 		model.addAttribute("recoStatus",resRecoStatus);
@@ -150,7 +156,7 @@ public class BoardController {
 		}
 
 		
-		  int result = mapper.setInsert(board);
+		  int result = service.setInsert(board);
 		  if(result == 1) {
 			  return "redirect:/boardList.do";
 		  }else {
@@ -164,7 +170,7 @@ public class BoardController {
 	@RequestMapping("/boardUpdateForm")
 	public String boardUpdateForm(Model model,@RequestParam("no")int board_no) {
 		
-		Board boardDTO = mapper.getListOne(board_no);
+		Board boardDTO = service.getListOne(board_no);
 		
 		model.addAttribute("boardDTO",boardDTO);
 			
@@ -174,7 +180,7 @@ public class BoardController {
 	@PostMapping("/boardUpdate")
 	public String boardUpdate(Model mode, Board board) {
 		
-		int result = mapper.setUpdate(board);
+		int result = service.setUpdate(board);
 		
 		return "redirect:/boardView.do?no="+board.getBoard_no();
 	}
@@ -182,7 +188,7 @@ public class BoardController {
 	@PostMapping("/boardDelete")
 	public String boardDelete(int board_no) {
 		
-		int result = mapper.setDelete(board_no);
+		int result = service.setDelete(board_no);
 		
 		return "redirect:/boardList.do";
 	}
@@ -197,7 +203,7 @@ public class BoardController {
 		map.put("reco_status", boardReco.getReco_status());
 		
 		
-		mapper.setRecoInsert(map);
+		service.setRecoInsert(map);
 		
 	}
 	
@@ -209,7 +215,7 @@ public class BoardController {
 		map.put("board_no", boardReco.getBoard_no());
 		map.put("member_id", boardReco.getMember_id());
 		
-		mapper.setRecoDelete(map);
+		service.setRecoDelete(map);
 		
 	}
 	

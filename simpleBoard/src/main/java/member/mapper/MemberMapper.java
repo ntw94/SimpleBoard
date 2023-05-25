@@ -15,6 +15,6 @@ public interface MemberMapper {
 	public void setDelete(int member_no);
 	public void setUpdate(Member member);
 	
-	//로그인 처리
+	//아이디 비밀번호 처리
 	public Member setLogin(Member member);
 }
